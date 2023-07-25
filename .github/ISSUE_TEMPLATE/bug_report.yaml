@@ -1,0 +1,54 @@
+name: Bug Report
+description: Bug Report
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        Please be as specific and brief as possible, and write in English, which can be translated into any language through translation.
+
+        日本語でも可能です。
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: Enter the browser that caused the problem (e.g., Chrome 114.0.5735.134)
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Version of release
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: releaseType
+    attributes:
+      label: Release Type
+      options:
+        - Chrome Extension
+        - Userscript
+    validations:
+      required: true
+
+  - type: input
+    id: userscriptManager
+    attributes:
+      label: Userscript manager
+      description: If you are using the Userscript version, please tell us which manager you are using (e.g., Tampermonkey 4.19.0)
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: What is the problem?
+      description: Please tell us about the problem you are experiencing.
+    validations:
+      required: true

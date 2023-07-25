@@ -5,7 +5,7 @@
 # X to Twitter
 [Greasyfork](https://greasyfork.org/ja/scripts/471572-x-to-twitter)
 
-[Chrome web store (coming soon..)](#)
+[Chrome web store](https://chrome.google.com/webstore/detail/x-to-twitter/jcgbihbakhgpbmhejamlpijhlohjhnbn?hl=ja&authuser=0)
 
 X logo back to the original Twitter Bird logo
 

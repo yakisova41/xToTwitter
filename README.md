@@ -9,4 +9,4 @@
 
 X logo back to the original Twitter Bird logo
 
-![screenshot](https://github.com/yakisova41/xToTwitter/assets/75610521/445749f3-6c1f-4665-a10a-8149335b7261)
+![screenshot1](https://github.com/yakisova41/xToTwitter/assets/75610521/e99315be-61b2-4164-ba63-86f18931b935)

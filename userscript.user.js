@@ -3,7 +3,7 @@
 // @name:ja  X to Twitter
 // @description  Get our Twitter back from Elon.
 // @namespace    https://xtotwitter.yakisova.com
-// @version      1.6.0
+// @version      1.7.0
 // @author       yakisova41
 // @match        https://twitter.com/*
 // @match        https://X.com/*
@@ -24,28 +24,65 @@ const loadingBirdColor = "rgba(29,161,242,1.00)";
 
 const style = document.createElement("style");
 
-style.innerHTML = `
-path[d="${xLogoPath}"], path[d="${loadingXLogoPath}"]{
-    d:path("${birdPath}");
-    fill: inherit;
-    color: ${twitterColor};
+let head;
+if(GM_info.scriptHandler === "Userscripts") {
+    head = document.head;
+    trashSafari();
+    style.innerHTML = `
+    .x-to-twitter {
+        fill: inherit;
+        color: ${twitterColor};
+    }
+
+    div[style="color: rgb(239, 243, 244);"] > svg > g > path {
+        color: rgb(239, 243, 244);
+    }
+
+    div[aria-label="Loading…"] > svg > g > path {
+        fill: inherit;
+        color: ${loadingBirdColor};
+    }
+    `;
+}
+else {
+    head = unsafeWindow.document.head;
+    style.innerHTML = `
+    path[d="${xLogoPath}"], path[d="${loadingXLogoPath}"] {
+        d:path("${birdPath}");
+        fill: inherit;
+        color: ${twitterColor};
+    }
+
+    div[style="color: rgb(239, 243, 244);"] > svg > g > path {
+        color: rgb(239, 243, 244);
+    }
+
+    div[aria-label="Loading…"] > svg > g > path {
+        d:path("${birdPath}");
+        fill: inherit;
+        color: ${loadingBirdColor};
+    }
+    `;
 }
 
-div[style="color: rgb(239, 243, 244);"] > svg > g > path[d="${xLogoPath}"] {
-    color: rgb(239, 243, 244);
+if(head !== null && head !== undefined){
+    headFound(head);
+}
+else {
+    const i = setInterval(()=>{
+        if(document.head !== undefined && document.head !== null) {
+            headFound(document.head)
+            clearInterval(i);
+        }
+    }, 100);
 }
 
-div[aria-label="Loading…"] > svg > g > path {
-    d:path("${birdPath}");
-    fill: inherit;
-    color: ${loadingBirdColor};
-}
-`;
-
-
-const head = unsafeWindow.document.head;
-if(head !== null){
-    unsafeWindow.document.head.querySelector('[rel="shortcut icon"]').href = "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJkSURBVHgB7VZBbtpQEH3zIW0WVYuXVaH4Bs0NSk4AOUFhEarskhMknIDsqkKlcIT0BNAT1D1B3ZJK3dmVuirwp/MhVmzAxiagKBJv9+ePZ97M/JkxsMMODwzChlD84FWQp3MxeCDHAhiumB+MJrr1+8Ryw3p/9+H4DctfIPCq49Xlw8Kv99YlMuB19885gy/i7llziwGfFFWJyR02XzSCuwiBUse7BlFVaz5LS8KQVkRXaXRJsqImfDjKSZBNyzEyFWFKVJ4KFbWLElUao6KbSk8i9TXgTPaorxTskPwOxa7/9baGt4zg8oQbNyfWYJlRU0/KUx9ZwNwYNq1ecFRzl18QpW0bB0Ks//KjV1uwlbuLJA3GxEdh5wb5yGEPl3qMd2xecYQHKnlFlVLX95kxYCFKGg5IlU2a0uLpCM68LEJA+sJ/Dm6Jy3aMjQIRakRUm+UuvfOp/X34iQSejeFo0Hdx4optG5uFH/R+GHNvANcm3VtwLs+Lvy2TRwhIOnrYHhysIuDKcCDwGbYAjglOzQt+HssElF6dvoNNOZeuCSbfSgIGMjILMo4/ExZf7TqghNLmlwm1gpSC2tmaLAZMvWGz0Iu7XpqBm2NrQNN5cD+Y5ZOTdZyok3RZMusZOJUN+QZrQFb0oQkG6xIIYHe8A03Unx/Ryd6jS2ctAsbxmFRVynGKlM5na5ePVkUe0p+h9MmraS2zXqYgmSWjOPtElHbLTVB3Q79gqQlMScxqXpeav0UWiGMmXKSNOpZAAPvKs/U/1MRoxRxl+5WD+psUy2D5IdmRVoWjnqDnLlkyO+zwaPAf1zXwZL751PUAAAAASUVORK5CYII=";
+function headFound(head) {
+    const shortcutIcon = head.querySelector('[rel="shortcut icon"]')
+    if(shortcutIcon !== null) {
+        shortcutIcon.href = "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJkSURBVHgB7VZBbtpQEH3zIW0WVYuXVaH4Bs0NSk4AOUFhEarskhMknIDsqkKlcIT0BNAT1D1B3ZJK3dmVuirwp/MhVmzAxiagKBJv9+ePZ97M/JkxsMMODwzChlD84FWQp3MxeCDHAhiumB+MJrr1+8Ryw3p/9+H4DctfIPCq49Xlw8Kv99YlMuB19885gy/i7llziwGfFFWJyR02XzSCuwiBUse7BlFVaz5LS8KQVkRXaXRJsqImfDjKSZBNyzEyFWFKVJ4KFbWLElUao6KbSk8i9TXgTPaorxTskPwOxa7/9baGt4zg8oQbNyfWYJlRU0/KUx9ZwNwYNq1ecFRzl18QpW0bB0Ks//KjV1uwlbuLJA3GxEdh5wb5yGEPl3qMd2xecYQHKnlFlVLX95kxYCFKGg5IlU2a0uLpCM68LEJA+sJ/Dm6Jy3aMjQIRakRUm+UuvfOp/X34iQSejeFo0Hdx4optG5uFH/R+GHNvANcm3VtwLs+Lvy2TRwhIOnrYHhysIuDKcCDwGbYAjglOzQt+HssElF6dvoNNOZeuCSbfSgIGMjILMo4/ExZf7TqghNLmlwm1gpSC2tmaLAZMvWGz0Iu7XpqBm2NrQNN5cD+Y5ZOTdZyok3RZMusZOJUN+QZrQFb0oQkG6xIIYHe8A03Unx/Ryd6jS2ctAsbxmFRVynGKlM5na5ePVkUe0p+h9MmraS2zXqYgmSWjOPtElHbLTVB3Q79gqQlMScxqXpeav0UWiGMmXKSNOpZAAPvKs/U/1MRoxRxl+5WD+psUy2D5IdmRVoWjnqDnLlkyO+zwaPAf1zXwZL751PUAAAAASUVORK5CYII=";
+    }
+    
     head.appendChild(style);
     titleChange(head);
 }
@@ -74,4 +111,20 @@ function titleChange(head) {
             clearInterval(i);
         }
     },100);
+}
+
+
+function trashSafari() {
+    setInterval(()=>{
+        const pathElems = document.querySelectorAll(`path[d="${xLogoPath}"]:not(.x-to-twitter), path[d="${loadingXLogoPath}"]:not(.x-to-twitter)`);
+        
+        if(pathElems.length !== 0) {
+            pathElems.forEach(path => {
+                path.setAttribute("d", birdPath);
+                path.classList.add("x-to-twitter");
+            });
+        }
+    },100);
+
+    document.querySelector('div[aria-label="Loading…"] > svg > g > path').setAttribute("d", birdPath);
 }

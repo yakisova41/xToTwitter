@@ -14,7 +14,7 @@
       {
         "matches": ["https://twitter.com/*", "https://X.com/*"],
         "run_at": "document_start",
-        "js": ["contentScript.js"]
+        "js": ["userscript.user.js"]
       }
   ],
   "web_accessible_resources": [{

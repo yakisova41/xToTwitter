@@ -18,7 +18,8 @@
 const paths = {
     xLogoPath: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
     loadingXLogoPath: "M14.258 10.152L23.176 0h-2.113l-7.747 8.813L7.133 0H0l9.352 13.328L0 23.973h2.113l8.176-9.309 6.531 9.309h7.133zm-2.895 3.293l-.949-1.328L2.875 1.56h3.246l6.086 8.523.945 1.328 7.91 11.078h-3.246zm0 0",
-    birdPath: "M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"
+    birdPath: "M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z",
+    verifiedPath: "M8.52 3.59c.8-1.1 2.04-1.84 3.48-1.84s2.68.74 3.49 1.84c1.34-.21 2.74.14 3.76 1.16s1.37 2.42 1.16 3.77c1.1.8 1.84 2.04 1.84 3.48s-.74 2.68-1.84 3.48c.21 1.34-.14 2.75-1.16 3.77s-2.42 1.37-3.76 1.16c-.8 1.1-2.05 1.84-3.49 1.84s-2.68-.74-3.48-1.84c-1.34.21-2.75-.14-3.77-1.16-1.01-1.02-1.37-2.42-1.16-3.77-1.09-.8-1.84-2.04-1.84-3.48s.75-2.68 1.84-3.48c-.21-1.35.14-2.75 1.16-3.77s2.43-1.37 3.77-1.16zm3.48.16c-.85 0-1.66.53-2.12 1.43l-.38.77-.82-.27c-.96-.32-1.91-.12-2.51.49-.6.6-.8 1.54-.49 2.51l.27.81-.77.39c-.9.46-1.43 1.27-1.43 2.12s.53 1.66 1.43 2.12l.77.39-.27.81c-.31.97-.11 1.91.49 2.51.6.61 1.55.81 2.51.49l.82-.27.38.77c.46.9 1.27 1.43 2.12 1.43s1.66-.53 2.12-1.43l.39-.77.82.27c.96.32 1.9.12 2.51-.49.6-.6.8-1.55.48-2.51l-.26-.81.76-.39c.91-.46 1.43-1.27 1.43-2.12s-.52-1.66-1.43-2.12l-.77-.39.27-.81c.32-.97.12-1.91-.48-2.51-.61-.61-1.55-.81-2.51-.49l-.82.27-.39-.77c-.46-.9-1.27-1.43-2.12-1.43zm4.74 5.68l-6.2 6.77-3.74-3.74 1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36z"
 }
 
 const colors = {
@@ -60,27 +61,27 @@ const postToTweetText = {
     de: {
         tweetBtn: "Tweet",
         retweet: "Retweet",
-        tweet:"Tweet"  
+        tweet:"Tweet"
     },
     ru: {
         tweetBtn: "Твит",
         retweet: "Ретвнитнуть",
-        tweet:"Твит"  
+        tweet:"Твит"
     },
     pt: {
         tweetBtn: "Tweet",
         retweet: "Retweetar",
-        tweet:"Tweet"  
+        tweet:"Tweet"
     },
     fr: {
         tweetBtn: "Tweet",
         retweet: "Retweeter",
-        tweet:"Tweet"  
+        tweet:"Tweet"
     },
    tr: {
         tweetBtn: "Tweet",
         retweet: "Retweet",
-        tweet:"Tweet"  
+        tweet:"Tweet"
     },
     ar: {
         tweetBtn: "تويت",
@@ -182,19 +183,23 @@ function titleChange(head) {
 
 function styleInject(head) {
     const style = document.createElement("style");
+
+    const verifiedSelector = `a[href="/i/verified-choose"] > div > div > svg > g > path`
+    const verifiedSelectorMobile = `a[href="/i/verified-choose"] > div > svg > g > path`
+
     style.innerHTML = `
     .x-to-twitter {
         fill: inherit;
         color: ${colors.twitterColor};
     }
-    
-    path[d="${paths.xLogoPath}"], path[d="${paths.loadingXLogoPath}"] {
+
+    path[d="${paths.xLogoPath}"]:not(${verifiedSelector}):not(${verifiedSelectorMobile}), path[d="${paths.loadingXLogoPath}"] {
         d:path("${paths.birdPath}");
         fill: inherit;
         color: ${colors.twitterColor};
     }
 
-    div[style="color: rgb(239, 243, 244);"] > svg > g > path {
+    div[style="color: rgb(239, 243, 244);"] > svg > g > path:not(${verifiedSelector}):not(${verifiedSelectorMobile}) {
         color: rgb(239, 243, 244);
     }
 
@@ -202,6 +207,10 @@ function styleInject(head) {
         d:path("${paths.birdPath}");
         fill: inherit;
         color: ${colors.loadingBirdColor};
+    }
+
+    ${verifiedSelector}, ${verifiedSelectorMobile} {
+        d:path("${paths.verifiedPath}");
     }
     `;
     head.appendChild(style);
@@ -265,13 +274,20 @@ function postToTweet() {
 // 一つ一つのDOMを書き換えることで対応
 function trashSafari() {
     setInterval(()=>{
-        const pathElems = document.querySelectorAll(`path[d="${paths.xLogoPath}"]:not(.x-to-twitter), path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`);
-        
+        const pathElems = document.querySelectorAll(`path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path, a[href="/i/verified-choose"] > div > svg > g > path), path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`);
         if(pathElems.length !== 0) {
             pathElems.forEach(path => {
                 path.setAttribute("d", paths.birdPath);
                 path.classList.add("x-to-twitter");
             });
+        }
+
+        const verifiedElems = document.querySelectorAll(`a[href="/i/verified-choose"] > div > div > svg > g > path:not(.x-to-twitter-noncolor), a[href="/i/verified-choose"] > div > svg > g > path:not(.x-to-twitter-noncolor)`)
+        if(verifiedElems.length !== 0) {
+            verifiedElems.forEach(path => {
+                path.setAttribute("d", paths.verifiedPath);
+                path.classList.add("x-to-twitter-noncolor");
+            })
         }
     },200);
 
@@ -295,7 +311,6 @@ function headFound(head) {
     if(shortcutIcon !== null) {
         shortcutIcon.href = "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJkSURBVHgB7VZBbtpQEH3zIW0WVYuXVaH4Bs0NSk4AOUFhEarskhMknIDsqkKlcIT0BNAT1D1B3ZJK3dmVuirwp/MhVmzAxiagKBJv9+ePZ97M/JkxsMMODwzChlD84FWQp3MxeCDHAhiumB+MJrr1+8Ryw3p/9+H4DctfIPCq49Xlw8Kv99YlMuB19885gy/i7llziwGfFFWJyR02XzSCuwiBUse7BlFVaz5LS8KQVkRXaXRJsqImfDjKSZBNyzEyFWFKVJ4KFbWLElUao6KbSk8i9TXgTPaorxTskPwOxa7/9baGt4zg8oQbNyfWYJlRU0/KUx9ZwNwYNq1ecFRzl18QpW0bB0Ks//KjV1uwlbuLJA3GxEdh5wb5yGEPl3qMd2xecYQHKnlFlVLX95kxYCFKGg5IlU2a0uLpCM68LEJA+sJ/Dm6Jy3aMjQIRakRUm+UuvfOp/X34iQSejeFo0Hdx4optG5uFH/R+GHNvANcm3VtwLs+Lvy2TRwhIOnrYHhysIuDKcCDwGbYAjglOzQt+HssElF6dvoNNOZeuCSbfSgIGMjILMo4/ExZf7TqghNLmlwm1gpSC2tmaLAZMvWGz0Iu7XpqBm2NrQNN5cD+Y5ZOTdZyok3RZMusZOJUN+QZrQFb0oQkG6xIIYHe8A03Unx/Ryd6jS2ctAsbxmFRVynGKlM5na5ePVkUe0p+h9MmraS2zXqYgmSWjOPtElHbLTVB3Q79gqQlMScxqXpeav0UWiGMmXKSNOpZAAPvKs/U/1MRoxRxl+5WD+psUy2D5IdmRVoWjnqDnLlkyO+zwaPAf1zXwZL751PUAAAAASUVORK5CYII=";
     }
-    
     styleInject(head);
     titleChange(head);
     postToTweet();
@@ -304,7 +319,6 @@ function headFound(head) {
 if(typeof GM_info !== 'undefined') {
     // userscript
     let head;
-    
     if(GM_info.scriptHandler === "Userscripts") {
         // ios
         head = document.head;
@@ -324,7 +338,7 @@ if(typeof GM_info !== 'undefined') {
                 clearInterval(i);
                 headFound(head);
             }
-        });        
+        });
     }
 }
 else {

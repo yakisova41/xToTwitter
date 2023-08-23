@@ -206,8 +206,8 @@ function postToTweetRetweetBtn(langData) {
  * リツイートカウンター
  */
 function postToTweetRetweetCounter(langData) {
-  const counter = document.querySelector(
-    "article > div > div > div:nth-child(3) > div:nth-child(5) > div:nth-child(2) > a > span > span"
+  const counterLinks = document.querySelectorAll(
+    "article > div > div > div:nth-child(3) > div:nth-child(5) > div > a"
   );
 
   const splitRetweets = (
@@ -218,11 +218,17 @@ function postToTweetRetweetCounter(langData) {
     splitRetweets[1].trim() +
     (splitRetweets[5] !== undefined ? splitRetweets[5] : "");
 
-  if (counter !== null) {
-    if (counter.textContent !== retweet) {
-      counter.textContent = retweet;
+  counterLinks.forEach((counterLink) => {
+    const hrefSplit = counterLink.getAttribute("href").split("/");
+    if (hrefSplit[4] === "retweets" && hrefSplit[5] === undefined) {
+      const counter = counterLink.querySelector("a > span > span");
+      if (counter !== null) {
+        if (counter.textContent !== retweet) {
+          counter.textContent = retweet;
+        }
+      }
     }
-  }
+  });
 }
 
 /**

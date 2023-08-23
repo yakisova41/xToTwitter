@@ -241,16 +241,16 @@ function postToTweetHeader(langData) {
 
   const splitPath = location.pathname.split("/");
 
-  if (header !== null && splitPath[2] === "status") {
-    if (header.textContent !== toTweet) {
-      //tweet
-      header.textContent = toTweet;
+  if (header !== null) {
+    if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
+      if (header.textContent !== quoteTweet) {
+        header.textContent = quoteTweet;
+      }
+    } else {
+      if (header.textContent !== toTweet) {
+        header.textContent = toTweet;
+      }
     }
-  }
-
-  if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
-    // quote
-    header.textContent = quoteTweet;
   }
 }
 

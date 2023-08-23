@@ -496,7 +496,7 @@ function headFound(head) {
  * 一つ一つのDOMを書き換えることで対応
  */
 function trashSafari() {
-  const ob = new MutationObserver(() => {
+  setInterval(() => {
     const pathElems = document.querySelectorAll(
       `path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path, a[href="/i/verified-choose"] > div > svg > g > path), path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`
     );
@@ -516,12 +516,7 @@ function trashSafari() {
         path.classList.add("x-to-twitter-noncolor");
       });
     }
-  });
-
-  ob.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  }, 100);
 
   document
     .querySelector('div[aria-label="Loading…"] > svg > g > path')
@@ -554,6 +549,7 @@ function main() {
     if (GM_info.scriptHandler === "Userscripts") {
       // ios
       head = document.head;
+      trashSafari();
     } else {
       head = unsafeWindow.document.head;
     }

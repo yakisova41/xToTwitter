@@ -284,10 +284,9 @@ function postToTweetRetweeted(langData) {
 
   retweetedSpans?.forEach((retweetedSpan) => {
     retweetedSpan.classList.add("x-to-twitter-retweeted");
-    const namespan = retweetedSpan.querySelector("span");
-    retweetedSpan.innerHTML = "";
-    retweetedSpan.appendChild(namespan);
-    retweetedSpan.innerHTML = retweetedSpan.innerHTML + retweeted;
+    if (retweetedSpan.childNodes[2] !== undefined) {
+      retweetedSpan.childNodes[2].textContent = retweeted;
+    }
   });
 }
 

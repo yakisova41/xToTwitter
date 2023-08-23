@@ -493,7 +493,7 @@ function headFound(head) {
   styleInject(head);
   titleChange(head);
   postToTweet();
-  i18nTest();
+  // i18nTest();
 }
 
 /**

@@ -8,12 +8,12 @@ https://web.archive.org/web/20220511223706/https://abs.twimg.com/responsive-web/
 https://web.archive.org/web/20220423221248/https://abs.twimg.com/responsive-web/client-web/i18n/el.9014c326.js
 https://web.archive.org/web/20220117223653/https://abs.twimg.com/responsive-web/client-web/i18n/en-GB.5c8f7775.js
 https://web.archive.org/web/20220803081348/https://abs.twimg.com/responsive-web/client-web/i18n/en.07a18cc8.js
-https://web.archive.org/web/20200910045016/https://abs.twimg.com/responsive-web/client-web/i18n/es.1bcf3f25.js
+https://web.archive.org/web/20220301033609/https://abs.twimg.com/responsive-web/client-web/i18n/es.e548ad55.js
 https://web.archive.org/web/20220524104720/https://abs.twimg.com/responsive-web/client-web/i18n/fa.0af6f536.js
 https://web.archive.org/web/20211118002256/https://abs.twimg.com/responsive-web/client-web/i18n/eu.48c68fd5.js
-https://web.archive.org/web/20220220160017/https://abs.twimg.com/responsive-web/client-web/i18n/fi.2e264705.js
+https://web.archive.org/web/20220123015129/https://abs.twimg.com/responsive-web/client-web/i18n/fi.3de2e545.js
 https://web.archive.org/web/20220609001542/https://abs.twimg.com/responsive-web/client-web/i18n/fr.2cb9c6b7.js
-https://web.archive.org/web/20221021044407/https://abs.twimg.com/responsive-web/client-web/i18n/ga.9a2f21d5.js
+https://web.archive.org/web/20220611084831/https://abs.twimg.com/responsive-web/client-web/i18n/ga.dcad53b8.js
 https://web.archive.org/web/20220227191218/https://abs.twimg.com/responsive-web/client-web/i18n/gl.bea48ab5.js
 https://web.archive.org/web/20220209153403/https://abs.twimg.com/responsive-web/client-web/i18n/gu.be4912c5.js
 https://web.archive.org/web/20220201094825/https://abs.twimg.com/responsive-web/client-web/i18n/he.97cedef5.js
@@ -26,7 +26,7 @@ https://web.archive.org/web/20220301172859/https://abs.twimg.com/responsive-web/
 https://web.archive.org/web/20220611084858/https://abs.twimg.com/responsive-web/client-web/i18n/kn.53985548.js
 https://web.archive.org/web/20220507114639/https://abs.twimg.com/responsive-web/client-web/i18n/ko.3e781036.js
 https://web.archive.org/web/20220204221328/https://abs.twimg.com/responsive-web/client-web/i18n/mr.5099e3c5.js
-https://web.archive.org/web/20220520214914/https://abs.twimg.com/responsive-web/client-web/i18n/ms.5f31ab05.js
+https://web.archive.org/web/20220129101517/https://abs.twimg.com/responsive-web/client-web/i18n/ms.760ce695.js
 https://web.archive.org/web/20220715222339/https://abs.twimg.com/responsive-web/client-web/i18n/nb.5f744998.js
 https://web.archive.org/web/20220616095933/https://abs.twimg.com/responsive-web/client-web/i18n/nl.0db889f8.js
 https://web.archive.org/web/20220827230252/https://abs.twimg.com/responsive-web/client-web/i18n/pl.6468eb95.js

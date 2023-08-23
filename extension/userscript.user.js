@@ -241,7 +241,7 @@ function postToTweetHeader(langData) {
 
   const splitPath = location.pathname.split("/");
 
-  if (header !== null) {
+  if (header !== null && splitPath[2] === "status") {
     if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
       if (header.textContent !== quoteTweet) {
         header.textContent = quoteTweet;
@@ -350,9 +350,6 @@ function postToTweet() {
   ob.observe(document.body, {
     childList: true,
     subtree: true,
-    textContent: true,
-    characterData: true,
-    attributes: true,
   });
 }
 
@@ -486,7 +483,11 @@ function headFound(head) {
   }
   styleInject(head);
   titleChange(head);
-  postToTweet();
+
+  setTimeout(() => {
+    postToTweet();
+  }, 100);
+
   // i18nTest();
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "__MSG_Name__",
   "short_name": "xToTwitter",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "manifest_version": 3,
   "description": "__MSG_Description__",
   "default_locale": "en",
@@ -11,17 +11,16 @@
     "128": "assets/icon128.png"
   },
   "content_scripts": [
-      {
-        "matches": ["https://twitter.com/*", "https://X.com/*"],
-        "run_at": "document_start",
-        "js": ["userscript.user.js"]
-      }
+    {
+      "matches": ["https://twitter.com/*", "https://X.com/*"],
+      "run_at": "document_start",
+      "js": ["userscript.user.js"]
+    }
   ],
-  "web_accessible_resources": [{
-    "resources": [
-      "twitterManifest.json",
-      "sw_icons/*"
-    ],
-    "matches": ["https://twitter.com/*", "https://X.com/*"]
-  }]
+  "web_accessible_resources": [
+    {
+      "resources": ["twitterManifest.json", "sw_icons/*"],
+      "matches": ["https://twitter.com/*", "https://X.com/*"]
+    }
+  ]
 }

@@ -496,7 +496,7 @@ function headFound(head) {
  * 一つ一つのDOMを書き換えることで対応
  */
 function trashSafari() {
-  setInterval(() => {
+  const ob = new MutationObserver(() => {
     const pathElems = document.querySelectorAll(
       `path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path, a[href="/i/verified-choose"] > div > svg > g > path), path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`
     );
@@ -516,7 +516,12 @@ function trashSafari() {
         path.classList.add("x-to-twitter-noncolor");
       });
     }
-  }, 100);
+  });
+
+  ob.observe(document.body, {
+    subtree: true,
+    childList: true,
+  });
 
   document
     .querySelector('div[aria-label="Loading…"] > svg > g > path')

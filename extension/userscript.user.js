@@ -108,11 +108,24 @@ function postToTweetButton(langData) {
   const tweetButton = document.querySelector(
     'div[data-testid="tweetButton"] > div > span > span'
   );
+
+  const tweetAll = langData.f70a36d0;
+
   const toTweet =
     langData.bea869b3 !== null ? langData.bea869b3 : langData.bea869b4;
 
-  if (tweetButton !== null && tweetButton.textContent !== toTweet) {
-    tweetButton.textContent = toTweet;
+  const isTweetAll =
+    document.querySelector('label[data-testid="tweetTextarea_1_label"]') !==
+    null;
+
+  if (isTweetAll) {
+    if (tweetButton !== null && tweetButton.textContent !== tweetAll) {
+      tweetButton.textContent = tweetAll;
+    }
+  } else {
+    if (tweetButton !== null && tweetButton.textContent !== toTweet) {
+      tweetButton.textContent = toTweet;
+    }
   }
 }
 
@@ -412,6 +425,7 @@ function i18nTest() {
     { name: "Retweeted by", keys: ["d25289b4"] },
     { name: "{user} Tweeted", keys: ["d91695cb"] },
     { name: "Tweets", keys: ["bab1f8b0"] },
+    { name: "Tweet all", keys: ["f70a36d0"] },
   ];
 
   let errorExist = false;

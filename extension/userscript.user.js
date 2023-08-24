@@ -232,6 +232,35 @@ function postToTweetRetweetCounter(langData) {
 }
 
 /**
+ * 引用ツイートカウンター
+ */
+function postToTweetQuoteCounter(langData) {
+  const counterLinks = document.querySelectorAll(
+    "article > div > div > div:nth-child(3) > div:nth-child(5) > div > a"
+  );
+
+  const splitRetweets = (
+    langData.e2414184 !== null ? langData.e2414184 : langData.e2414185
+  ).split('"');
+
+  const quote =
+    splitRetweets[1].trim() +
+    (splitRetweets[5] !== undefined ? splitRetweets[5] : "");
+
+  counterLinks.forEach((counterLink) => {
+    const hrefSplit = counterLink.getAttribute("href").split("/");
+    if (hrefSplit[4] === "retweets" && hrefSplit[5] === "with_comments") {
+      const counter = counterLink.querySelector("a > span > span");
+      if (counter !== null) {
+        if (counter.textContent !== quote) {
+          counter.textContent = quote;
+        }
+      }
+    }
+  });
+}
+
+/**
  * Header
  */
 function postToTweetHeader(langData) {
@@ -352,6 +381,7 @@ function postToTweet() {
     postToTweetRetweetedByPopup(langData);
     postToTweetTweetedPill(langData);
     postToTweetProfileTweets(langData);
+    postToTweetQuoteCounter(langData);
   });
   ob.observe(document.body, {
     childList: true,

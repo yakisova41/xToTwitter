@@ -352,12 +352,15 @@ function postToTweetProfileTweets(langData) {
     'div[role="tablist"] > div[role="presentation"]:nth-child(1) > a > div > div > span'
   );
   if (profileTabPost !== null && profileTabPost.textContent !== tweets) {
-    if (
-      document.querySelector(`script[data-testid="UserProfileSchema-test"]`) !==
-      null
-    ) {
-      profileTabPost.textContent = tweets;
-    }
+    setTimeout(() => {
+      if (
+        document.querySelector(
+          `script[data-testid="UserProfileSchema-test"]`
+        ) !== null
+      ) {
+        profileTabPost.textContent = tweets;
+      }
+    });
   }
 }
 
@@ -382,6 +385,11 @@ function postToTweet() {
     postToTweetQuoteCounter(langData);
   });
   ob.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  ob.observe(document.head, {
     childList: true,
     subtree: true,
   });

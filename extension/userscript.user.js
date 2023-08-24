@@ -392,18 +392,18 @@ function postToTweet() {
  */
 function i18nTest() {
   const tests = [
-    { name: "ツイートする", keys: ["bea869b3", "bea869b4"] },
-    { name: "返信", keys: ["hdf72269", "d17df548"] },
-    { name: "いまどうしてる？", keys: ["e349147c", "e349147b"] },
-    { name: "リツイート", keys: ["d497b854", "c42234da"] },
-    { name: "引用ツイート", keys: ["c9d7235d", "c9d7235e"] },
-    { name: "引用ツイート(Quote Tweets)", keys: ["c9d7235d", "bd7c0390"] },
-    { name: "リツイートを取り消す", keys: ["f3bbbb87", "fa9ce7f4"] },
-    { name: "件のリツイート", keys: ["hb7b0cea", "hb7b0ceb"] },
-    { name: "リポストしました", keys: ["h99e9c95"] },
-    { name: "リツイートしたユーザー", keys: ["d25289b4"] },
-    { name: "さんがツイートしました", keys: ["d91695cb"] },
-    { name: "ツイート(Tweets)", keys: ["bab1f8b0"] },
+    { name: "Tweet", keys: ["bea869b3", "bea869b4"] },
+    { name: "Reply", keys: ["hdf72269", "d17df548"] },
+    { name: "What`s happening?", keys: ["e349147c", "e349147b"] },
+    { name: "Retweet", keys: ["d497b854", "c42234da"] },
+    { name: "Quote Tweet", keys: ["c9d7235d", "c9d7235e"] },
+    { name: "Quote Tweets", keys: ["c9d7235d", "bd7c0390"] },
+    { name: "Undo Retweet", keys: ["f3bbbb87", "fa9ce7f4"] },
+    { name: "Retweets (counter)", keys: ["hb7b0cea", "hb7b0ceb"] },
+    { name: "{user} Retweeted", keys: ["h99e9c95"] },
+    { name: "Retweeted by", keys: ["d25289b4"] },
+    { name: "{user} Tweeted", keys: ["d91695cb"] },
+    { name: "Tweets", keys: ["bab1f8b0"] },
   ];
 
   let errorExist = false;
@@ -430,7 +430,7 @@ function i18nTest() {
       "%c[X to Twitter] Did not pass translation test%c",
       "color:white; background-color:purple; font-size: 20px",
       "",
-      "\nIf you have any Twitter i18n js files archived in early 2022, please contact the repository issue\nhttps://github.com/yakisova41/xToTwitter/issues"
+      "\nIf you can provide an appropriate translation, please contact the issue on github\nhttps://github.com/yakisova41/xToTwitter/issues"
     );
   }
 }
@@ -517,6 +517,7 @@ function headFound(head) {
   }
   styleInject(head);
   titleChange(head);
+  i18nTest();
 
   setTimeout(() => {
     postToTweet();

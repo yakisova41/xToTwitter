@@ -3,7 +3,7 @@
 // @name:ja  X to Twitter
 // @description  Get our Twitter back from Elon.
 // @namespace    https://xtotwitter.yakisova.com
-// @version      2.0.0
+// @version      2.1.0
 // @author       yakisova41
 // @match        https://twitter.com/*
 // @match        https://X.com/*

@@ -353,10 +353,8 @@ function postToTweetProfileTweets(langData) {
   );
   if (profileTabPost !== null && profileTabPost.textContent !== tweets) {
     if (
-      location.pathname !== "/home" &&
-      location.pathname !== "/notifications" &&
-      location.pathname !== "/explore" &&
-      location.pathname !== "/search"
+      document.querySelector(`script[data-testid="UserProfileSchema-test"]`) !==
+      null
     ) {
       profileTabPost.textContent = tweets;
     }

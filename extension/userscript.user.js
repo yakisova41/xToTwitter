@@ -108,11 +108,24 @@ function postToTweetButton(langData) {
   const tweetButton = document.querySelector(
     'div[data-testid="tweetButton"] > div > span > span'
   );
+
+  const tweetAll = langData.f70a36d0;
+
   const toTweet =
     langData.bea869b3 !== null ? langData.bea869b3 : langData.bea869b4;
 
-  if (tweetButton !== null && tweetButton.textContent !== toTweet) {
-    tweetButton.textContent = toTweet;
+  const isTweetAll =
+    document.querySelector('label[data-testid="tweetTextarea_1_label"]') !==
+    null;
+
+  if (isTweetAll) {
+    if (tweetButton !== null && tweetButton.textContent !== tweetAll) {
+      tweetButton.textContent = tweetAll;
+    }
+  } else {
+    if (tweetButton !== null && tweetButton.textContent !== toTweet) {
+      tweetButton.textContent = toTweet;
+    }
   }
 }
 
@@ -232,6 +245,35 @@ function postToTweetRetweetCounter(langData) {
 }
 
 /**
+ * 引用ツイートカウンター
+ */
+function postToTweetQuoteCounter(langData) {
+  const counterLinks = document.querySelectorAll(
+    "article > div > div > div:nth-child(3) > div:nth-child(5) > div > a"
+  );
+
+  const splitRetweets = (
+    langData.e2414184 !== null ? langData.e2414184 : langData.e2414185
+  ).split('"');
+
+  const quote =
+    splitRetweets[1].trim() +
+    (splitRetweets[5] !== undefined ? splitRetweets[5] : "");
+
+  counterLinks.forEach((counterLink) => {
+    const hrefSplit = counterLink.getAttribute("href").split("/");
+    if (hrefSplit[4] === "retweets" && hrefSplit[5] === "with_comments") {
+      const counter = counterLink.querySelector("a > span > span");
+      if (counter !== null) {
+        if (counter.textContent !== quote) {
+          counter.textContent = quote;
+        }
+      }
+    }
+  });
+}
+
+/**
  * Header
  */
 function postToTweetHeader(langData) {
@@ -323,14 +365,15 @@ function postToTweetProfileTweets(langData) {
     'div[role="tablist"] > div[role="presentation"]:nth-child(1) > a > div > div > span'
   );
   if (profileTabPost !== null && profileTabPost.textContent !== tweets) {
-    if (
-      location.pathname !== "/home" &&
-      location.pathname !== "/notifications" &&
-      location.pathname !== "/explore" &&
-      location.pathname !== "/search"
-    ) {
-      profileTabPost.textContent = tweets;
-    }
+    setTimeout(() => {
+      if (
+        document.querySelector(
+          `script[data-testid="UserProfileSchema-test"]`
+        ) !== null
+      ) {
+        profileTabPost.textContent = tweets;
+      }
+    });
   }
 }
 
@@ -352,8 +395,14 @@ function postToTweet() {
     postToTweetRetweetedByPopup(langData);
     postToTweetTweetedPill(langData);
     postToTweetProfileTweets(langData);
+    postToTweetQuoteCounter(langData);
   });
   ob.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  ob.observe(document.head, {
     childList: true,
     subtree: true,
   });
@@ -364,18 +413,19 @@ function postToTweet() {
  */
 function i18nTest() {
   const tests = [
-    { name: "ツイートする", keys: ["bea869b3", "bea869b4"] },
-    { name: "返信", keys: ["hdf72269", "d17df548"] },
-    { name: "いまどうしてる？", keys: ["e349147c", "e349147b"] },
-    { name: "リツイート", keys: ["d497b854", "c42234da"] },
-    { name: "引用ツイート", keys: ["c9d7235d", "c9d7235e"] },
-    { name: "引用ツイート(Quote Tweets)", keys: ["c9d7235d", "bd7c0390"] },
-    { name: "リツイートを取り消す", keys: ["f3bbbb87", "fa9ce7f4"] },
-    { name: "件のリツイート", keys: ["hb7b0cea", "hb7b0ceb"] },
-    { name: "リポストしました", keys: ["h99e9c95"] },
-    { name: "リツイートしたユーザー", keys: ["d25289b4"] },
-    { name: "さんがツイートしました", keys: ["d91695cb"] },
-    { name: "ツイート(Tweets)", keys: ["bab1f8b0"] },
+    { name: "Tweet", keys: ["bea869b3", "bea869b4"] },
+    { name: "Reply", keys: ["hdf72269", "d17df548"] },
+    { name: "What`s happening?", keys: ["e349147c", "e349147b"] },
+    { name: "Retweet", keys: ["d497b854", "c42234da"] },
+    { name: "Quote Tweet", keys: ["c9d7235d", "c9d7235e"] },
+    { name: "Quote Tweets", keys: ["c9d7235d", "bd7c0390"] },
+    { name: "Undo Retweet", keys: ["f3bbbb87", "fa9ce7f4"] },
+    { name: "Retweets (counter)", keys: ["hb7b0cea", "hb7b0ceb"] },
+    { name: "{user} Retweeted", keys: ["h99e9c95"] },
+    { name: "Retweeted by", keys: ["d25289b4"] },
+    { name: "{user} Tweeted", keys: ["d91695cb"] },
+    { name: "Tweets", keys: ["bab1f8b0"] },
+    { name: "Tweet all", keys: ["f70a36d0"] },
   ];
 
   let errorExist = false;
@@ -402,7 +452,7 @@ function i18nTest() {
       "%c[X to Twitter] Did not pass translation test%c",
       "color:white; background-color:purple; font-size: 20px",
       "",
-      "\nIf you have any Twitter i18n js files archived in early 2022, please contact the repository issue\nhttps://github.com/yakisova41/xToTwitter/issues"
+      "\nIf you can provide an appropriate translation, please contact the issue on github\nhttps://github.com/yakisova41/xToTwitter/issues"
     );
   }
 }
@@ -489,12 +539,11 @@ function headFound(head) {
   }
   styleInject(head);
   titleChange(head);
+  i18nTest();
 
   setTimeout(() => {
     postToTweet();
   }, 100);
-
-  // i18nTest();
 }
 
 /**

@@ -1,30 +1,45 @@
 import { readFileSync, writeFileSync } from "fs";
 
 const getIds = [
-  "hb7b0cea", // 2022年1月頃のi18nファイル　件のリツイート,
-  "bea869b3", // 2022年1月頃のi18nファイル　ツイートする
-  "bab1f8b0", // 共通i18nファイル　Tweets
-  "c9d7235d", // 2022年1月頃のi18nファイル　引用ツイート
-  "d91695cb", // 2022年1月頃のi18nファイル　さんがツイートしました
-  "d497b854", // 2022年1月頃のi18nファイル　リツイート
-  "e2414184", // 2022年1月頃のi18nファイル　件の引用
-  "hdf72269", // 2022年1月頃のi18nファイル　返信
-  "d2c7a41c", // 2022年1月頃のi18nファイル　返信をツイート
-  "e349147b", // 2022年1月頃のi18nファイル　いまどうしてる？
-  "h99e9c95", // 共通i18nファイル　さんがリツイート
-  "f3bbbb87", // 2022年1月頃のi18nファイル リツイートを取り消す
-  "d25289b4", // 共通i18nファイル リツイートしたユーザー
-
-  "c42234da", // 2022年夏頃のi18nファイル retweet
-  "bea869b4", // 2022年夏頃のi18nファイル To tweet
-  "c9d7235e", // 2022年夏頃のi18nファイル quote tweet
-  "e2414185", // 2022年夏頃のi18nファイル quote tweet count
-  "f70a36d0", // 2022年夏頃のi18nファイル　tweet all
-  "d17df548", // 2022年夏頃のi18nファイル reply
-  "e349147c", // 2022年夏頃のi18nファイル　Whats happening
-  "hb7b0ceb", // 2022年夏頃のi18nファイル　Retweets　Count
-  "fa9ce7f4", // 2022年夏頃のi18nファイル　Undo Retweet
-  "bd7c0390", // 2022年夏頃のi18nファイル Quote Tweets
+  // Tweet all
+  "f70a36d0",
+  // Popup Top Retweeted by
+  "d25289b4",
+  // Profile Tab Tweets
+  "bab1f8b0",
+  // [user] Retweeted
+  "h99e9c95",
+  // Replay placeholder
+  "d2c7a41c",
+  // Quote Tweet Counter
+  "e2414184",
+  "e2414185",
+  // Retweet Counter
+  "hb7b0ceb",
+  "hb7b0cea",
+  // Header Quote Tweets
+  "bd7c0390",
+  "bd7c039f",
+  // Button "Tweet"
+  "bea869b4",
+  "bea869b3",
+  // Button Reply
+  "d17df548",
+  "hdf72269",
+  // Whats Happening placeholder
+  "e349147c",
+  "e349147b",
+  // Button Undo Retweet
+  "fa9ce7f4",
+  "f3bbbb87",
+  // Button Quote tweet
+  "c9d7235e",
+  "c9d7235d",
+  // Button Retweet
+  "c42234da",
+  "d497b854",
+  // Top Pill [user] Tweeted
+  "d91695cb",
 ];
 
 (async () => {

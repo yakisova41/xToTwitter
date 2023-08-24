@@ -544,8 +544,6 @@ function headFound(head) {
   setTimeout(() => {
     postToTweet();
   }, 100);
-
-  // i18nTest();
 }
 
 /**

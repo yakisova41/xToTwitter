@@ -289,14 +289,16 @@ function postToTweetHeader(langData) {
 
   const splitPath = location.pathname.split("/");
 
-  if (header !== null && splitPath[2] === "status") {
-    if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
-      if (header.textContent !== quoteTweet) {
-        header.textContent = quoteTweet;
-      }
-    } else {
-      if (header.textContent !== toTweet) {
-        header.textContent = toTweet;
+  if (header !== null) {
+    if (splitPath[2] === "status" && splitPath[4] !== "photo") {
+      if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
+        if (header.textContent !== quoteTweet) {
+          header.textContent = quoteTweet;
+        }
+      } else {
+        if (header.textContent !== toTweet) {
+          header.textContent = toTweet;
+        }
       }
     }
   }

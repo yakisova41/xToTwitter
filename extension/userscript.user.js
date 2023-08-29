@@ -114,17 +114,30 @@ function postToTweetButton(langData) {
   const toTweet =
     langData.bea869b3 !== null ? langData.bea869b3 : langData.bea869b4;
 
-  const isTweetAll =
-    document.querySelector('label[data-testid="tweetTextarea_1_label"]') !==
-    null;
+  const reply =
+    langData.hdf72269 !== null ? langData.hdf72269 : langData.d17df548;
 
-  if (isTweetAll) {
-    if (tweetButton !== null && tweetButton.textContent !== tweetAll) {
-      tweetButton.textContent = tweetAll;
+  const pathSplited = location.pathname.split("/");
+  if (pathSplited[2] === "status" && pathSplited[4] === "photo") {
+    /**
+     * photoページのときはtweetButtonが返信ボタンになるよ
+     */
+    if (tweetButton !== null && tweetButton.textContent !== reply) {
+      tweetButton.textContent = reply;
     }
   } else {
-    if (tweetButton !== null && tweetButton.textContent !== toTweet) {
-      tweetButton.textContent = toTweet;
+    const isTweetAll =
+      document.querySelector('label[data-testid="tweetTextarea_1_label"]') !==
+      null;
+
+    if (isTweetAll) {
+      if (tweetButton !== null && tweetButton.textContent !== tweetAll) {
+        tweetButton.textContent = tweetAll;
+      }
+    } else {
+      if (tweetButton !== null && tweetButton.textContent !== toTweet) {
+        tweetButton.textContent = toTweet;
+      }
     }
   }
 }

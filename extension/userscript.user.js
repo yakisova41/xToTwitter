@@ -3,7 +3,7 @@
 // @name:ja  X to Twitter
 // @description  Get our Twitter back from Elon.
 // @namespace    https://xtotwitter.yakisova.com
-// @version      2.1.0
+// @version      2.2.0
 // @author       yakisova41
 // @match        https://twitter.com/*
 // @match        https://X.com/*
@@ -114,17 +114,30 @@ function postToTweetButton(langData) {
   const toTweet =
     langData.bea869b3 !== null ? langData.bea869b3 : langData.bea869b4;
 
-  const isTweetAll =
-    document.querySelector('label[data-testid="tweetTextarea_1_label"]') !==
-    null;
+  const reply =
+    langData.hdf72269 !== null ? langData.hdf72269 : langData.d17df548;
 
-  if (isTweetAll) {
-    if (tweetButton !== null && tweetButton.textContent !== tweetAll) {
-      tweetButton.textContent = tweetAll;
+  const pathSplited = location.pathname.split("/");
+  if (pathSplited[2] === "status" && pathSplited[4] === "photo") {
+    /**
+     * photoページのときはtweetButtonが返信ボタンになるよ
+     */
+    if (tweetButton !== null && tweetButton.textContent !== reply) {
+      tweetButton.textContent = reply;
     }
   } else {
-    if (tweetButton !== null && tweetButton.textContent !== toTweet) {
-      tweetButton.textContent = toTweet;
+    const isTweetAll =
+      document.querySelector('label[data-testid="tweetTextarea_1_label"]') !==
+      null;
+
+    if (isTweetAll) {
+      if (tweetButton !== null && tweetButton.textContent !== tweetAll) {
+        tweetButton.textContent = tweetAll;
+      }
+    } else {
+      if (tweetButton !== null && tweetButton.textContent !== toTweet) {
+        tweetButton.textContent = toTweet;
+      }
     }
   }
 }
@@ -289,14 +302,16 @@ function postToTweetHeader(langData) {
 
   const splitPath = location.pathname.split("/");
 
-  if (header !== null && splitPath[2] === "status") {
-    if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
-      if (header.textContent !== quoteTweet) {
-        header.textContent = quoteTweet;
-      }
-    } else {
-      if (header.textContent !== toTweet) {
-        header.textContent = toTweet;
+  if (header !== null) {
+    if (splitPath[2] === "status" && splitPath[4] !== "photo") {
+      if (splitPath[4] === "retweets" && splitPath[5] === "with_comments") {
+        if (header.textContent !== quoteTweet) {
+          header.textContent = quoteTweet;
+        }
+      } else {
+        if (header.textContent !== toTweet) {
+          header.textContent = toTweet;
+        }
       }
     }
   }
@@ -532,11 +547,22 @@ function styleInject(head) {
  */
 function headFound(head) {
   // favicon change
-  const shortcutIcon = head.querySelector('[rel="shortcut icon"]');
-  if (shortcutIcon !== null) {
-    shortcutIcon.href =
-      "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJkSURBVHgB7VZBbtpQEH3zIW0WVYuXVaH4Bs0NSk4AOUFhEarskhMknIDsqkKlcIT0BNAT1D1B3ZJK3dmVuirwp/MhVmzAxiagKBJv9+ePZ97M/JkxsMMODwzChlD84FWQp3MxeCDHAhiumB+MJrr1+8Ryw3p/9+H4DctfIPCq49Xlw8Kv99YlMuB19885gy/i7llziwGfFFWJyR02XzSCuwiBUse7BlFVaz5LS8KQVkRXaXRJsqImfDjKSZBNyzEyFWFKVJ4KFbWLElUao6KbSk8i9TXgTPaorxTskPwOxa7/9baGt4zg8oQbNyfWYJlRU0/KUx9ZwNwYNq1ecFRzl18QpW0bB0Ks//KjV1uwlbuLJA3GxEdh5wb5yGEPl3qMd2xecYQHKnlFlVLX95kxYCFKGg5IlU2a0uLpCM68LEJA+sJ/Dm6Jy3aMjQIRakRUm+UuvfOp/X34iQSejeFo0Hdx4optG5uFH/R+GHNvANcm3VtwLs+Lvy2TRwhIOnrYHhysIuDKcCDwGbYAjglOzQt+HssElF6dvoNNOZeuCSbfSgIGMjILMo4/ExZf7TqghNLmlwm1gpSC2tmaLAZMvWGz0Iu7XpqBm2NrQNN5cD+Y5ZOTdZyok3RZMusZOJUN+QZrQFb0oQkG6xIIYHe8A03Unx/Ryd6jS2ctAsbxmFRVynGKlM5na5ePVkUe0p+h9MmraS2zXqYgmSWjOPtElHbLTVB3Q79gqQlMScxqXpeav0UWiGMmXKSNOpZAAPvKs/U/1MRoxRxl+5WD+psUy2D5IdmRVoWjnqDnLlkyO+zwaPAf1zXwZL751PUAAAAASUVORK5CYII=";
-  }
+  const faviconHref =
+    "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJkSURBVHgB7VZBbtpQEH3zIW0WVYuXVaH4Bs0NSk4AOUFhEarskhMknIDsqkKlcIT0BNAT1D1B3ZJK3dmVuirwp/MhVmzAxiagKBJv9+ePZ97M/JkxsMMODwzChlD84FWQp3MxeCDHAhiumB+MJrr1+8Ryw3p/9+H4DctfIPCq49Xlw8Kv99YlMuB19885gy/i7llziwGfFFWJyR02XzSCuwiBUse7BlFVaz5LS8KQVkRXaXRJsqImfDjKSZBNyzEyFWFKVJ4KFbWLElUao6KbSk8i9TXgTPaorxTskPwOxa7/9baGt4zg8oQbNyfWYJlRU0/KUx9ZwNwYNq1ecFRzl18QpW0bB0Ks//KjV1uwlbuLJA3GxEdh5wb5yGEPl3qMd2xecYQHKnlFlVLX95kxYCFKGg5IlU2a0uLpCM68LEJA+sJ/Dm6Jy3aMjQIRakRUm+UuvfOp/X34iQSejeFo0Hdx4optG5uFH/R+GHNvANcm3VtwLs+Lvy2TRwhIOnrYHhysIuDKcCDwGbYAjglOzQt+HssElF6dvoNNOZeuCSbfSgIGMjILMo4/ExZf7TqghNLmlwm1gpSC2tmaLAZMvWGz0Iu7XpqBm2NrQNN5cD+Y5ZOTdZyok3RZMusZOJUN+QZrQFb0oQkG6xIIYHe8A03Unx/Ryd6jS2ctAsbxmFRVynGKlM5na5ePVkUe0p+h9MmraS2zXqYgmSWjOPtElHbLTVB3Q79gqQlMScxqXpeav0UWiGMmXKSNOpZAAPvKs/U/1MRoxRxl+5WD+psUy2D5IdmRVoWjnqDnLlkyO+zwaPAf1zXwZL751PUAAAAASUVORK5CYII=";
+
+  const ob = new MutationObserver((e) => {
+    const shortcutIcon = head.querySelector('[rel="shortcut icon"]');
+    if (shortcutIcon !== null) {
+      if (shortcutIcon.getAttribute("href") !== faviconHref) {
+        shortcutIcon.href = faviconHref;
+      }
+    }
+  });
+  ob.observe(head, {
+    childList: true,
+    subtree: true,
+  });
+
   styleInject(head);
   titleChange(head);
   i18nTest();

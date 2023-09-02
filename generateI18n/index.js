@@ -40,6 +40,9 @@ const getIds = [
   "d497b854",
   // Top Pill [user] Tweeted
   "d91695cb",
+  // Show e.count Tweets
+  "d6917e0c",
+  "d6917e0d",
 ];
 
 (async () => {

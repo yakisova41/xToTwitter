@@ -545,7 +545,7 @@ function styleInject(head) {
   const verifiedSelector = `a[href="/i/verified-choose"] > div > div > svg > g > path`;
   const verifiedSelectorMobile = `a[href="/i/verified-choose"] > div > svg > g > path`;
   const xLogoSelector = `path[d="${paths.xLogoPath}"]:not(${verifiedSelector}):not(${verifiedSelectorMobile})`;
-  const xLogoDarkmodeSelector = `div[style="color: rgb(239, 243, 244);"] > svg > g > path:not(${verifiedSelector}):not(${verifiedSelectorMobile})`;
+  const xLogoDarkmodeSelector = `div[style="text-overflow: unset; color: rgb(239, 243, 244);"] > svg > g > path:not(${verifiedSelector}):not(${verifiedSelectorMobile})`;
 
   style.innerHTML = `
     .x-to-twitter {

@@ -36,8 +36,8 @@ const getIds = [
   "c9d7235e",
   "c9d7235d",
   // Button Retweet
-  "c42234da",
-  "d497b854",
+  "d6c8514a",
+  "d6c85149",
   // Top Pill [user] Tweeted
   "d91695cb",
   // Show e.count Tweets

@@ -299,7 +299,7 @@ function postToTweetQuoteCounter(langData) {
  */
 function postToTweetTopCountTweets(langData) {
   const showEPostsElem = document.querySelector(
-    `div[data-testid="cellInnerDiv"] > div > div[role="button"] > div > div > span`
+    `div[data-testid="cellInnerDiv"] > div > button[role="button"] > div > div > span`
   );
 
   const splitShowEPosts = (
@@ -423,7 +423,10 @@ function postToTweetProfileTweets(langData) {
   const profileTabPost = document.querySelector(
     'div[role="tablist"] > div[role="presentation"]:nth-child(1) > a > div > div > span'
   );
-  if (profileTabPost !== null && profileTabPost.textContent !== tweets) {
+
+  const isProfilePage = document.querySelector('div[data-testid="UserProfileHeader_Items"]') !== null
+
+  if (profileTabPost !== null && profileTabPost.textContent !== tweets && isProfilePage) {
     setTimeout(() => {
       if (
         document.querySelector(

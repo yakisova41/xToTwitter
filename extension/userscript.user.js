@@ -3,7 +3,7 @@
 // @name:ja  X to Twitter
 // @description  Get our Twitter back from Elon.
 // @namespace    https://xtotwitter.yakisova.com
-// @version      2.4.0
+// @version      2.4.1
 // @author       yakisova41
 // @match        https://twitter.com/*
 // @match        https://X.com/*
@@ -88,7 +88,7 @@ function postToTweetSideNavNewTweetButton(langData) {
  */
 function postToTweetButtonInline(langData) {
   const tweetButton = document.querySelector(
-    'div[data-testid="tweetButtonInline"] > div > span > span'
+    'button[data-testid="tweetButtonInline"] > div > span > span'
   );
   const toTweet =
     langData.bea869b3 !== null ? langData.bea869b3 : langData.bea869b4;
@@ -114,7 +114,7 @@ function postToTweetButtonInline(langData) {
  */
 function postToTweetButton(langData) {
   const tweetButton = document.querySelector(
-    'div[data-testid="tweetButton"] > div > span > span'
+    'button[data-testid="tweetButton"] > div > span > span'
   );
 
   const tweetAll = langData.f70a36d0;
@@ -609,16 +609,21 @@ function headFound(head) {
       }
     }
   });
-  ob.observe(head, {
-    childList: true,
-    subtree: true,
-  });
+
+  // wait rendering
+  setTimeout(() => {
+    ob.observe(head, {
+      childList: true,
+      subtree: true,
+    });
+    postToTweet();
+  }, 100);
+
 
   styleInject(head);
   titleChange(head);
   // i18nTest();
 
-  postToTweet();
 }
 
 /**

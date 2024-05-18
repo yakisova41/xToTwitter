@@ -684,7 +684,7 @@ function trashSafari() {
  * !! 拡張機能でのみ動作
  */
 function replaceManifest(head) {
-  document.querySelector('link[rel="manifest"').remove();
+  document.querySelector('link[rel="manifest"]').remove();
   const manifestEl = document.createElement("link");
   manifestEl.setAttribute("rel", "manifest");
   manifestEl.setAttribute("crossorigin", "use-credentials");
@@ -728,7 +728,10 @@ function main() {
       if (head !== null) {
         clearInterval(i);
         headFound(head);
-        replaceManifest(head);
+        
+        setTimeout(() => {
+          replaceManifest(head);
+        }, 100)
       }
     });
   }

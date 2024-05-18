@@ -120,7 +120,7 @@
 		}
 	],
 	"short_name": "Twitter",
-	"start_url": "https://twitter.com/?utm_source=homescreen&utm_medium=shortcut",
+	"start_url": "https://x.com/?utm_source=homescreen&utm_medium=shortcut",
 	"theme_color": "#ffffff",
 	"scope": "/",
 	"android_package_name": "com.twitter.android",

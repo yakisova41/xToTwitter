@@ -604,7 +604,7 @@ function styleInject(head) {
       background-color: ${colors.twitterColor}!important;
     }
 
-    a[data-testid="SideNav_NewTweet_Button"] div[dir="ltr"], button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButton"] div[dir="ltr"]  {
+    a[data-testid="SideNav_NewTweet_Button"] div[dir="ltr"], a[data-testid="SideNav_NewTweet_Button"] > div[dir="ltr"] > svg,  button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButton"] div[dir="ltr"]  {
       color: rgb(255, 255, 255)!important;
     }
     `;

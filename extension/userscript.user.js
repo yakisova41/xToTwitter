@@ -711,6 +711,25 @@ function replaceManifest(head) {
 }
 
 /**
+ * Run a callback in no time when a head element is found.
+ * @param {*} callback
+ */
+function headFinder(callback) {
+  const observer = new MutationObserver((mutations, obs) => {
+    const head = document.querySelector("head");
+    if (head) {
+      callback(head);
+      obs.disconnect();
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+}
+
+/**
  * スクリプトを実行
  */
 function main() {
@@ -728,26 +747,15 @@ function main() {
     if (head !== null && head !== undefined) {
       headFound(head);
     } else {
-      const i = setInterval(() => {
-        const head = document.head;
-        if (head !== undefined && head !== null) {
-          clearInterval(i);
-          headFound(head);
-        }
+      headFinder((head) => {
+        headFound(head);
       });
     }
   } else {
     // extension
-    const i = setInterval(() => {
-      const head = document.head;
-      if (head !== null) {
-        clearInterval(i);
-        headFound(head);
-
-        setTimeout(() => {
-          replaceManifest(head);
-        }, 100);
-      }
+    headFinder((head) => {
+      headFound(head);
+      replaceManifest(head);
     });
   }
 }

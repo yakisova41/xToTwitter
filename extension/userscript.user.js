@@ -524,6 +524,84 @@ function i18nTest() {
 }
 
 /**
+ * Get theme rgb from react state.
+ * @returns {Promise<string>} theme RGB
+ */
+function getThemeColor() {
+  function foundLtr(ltr) {
+    const propsKey = Object.keys(ltr).filter((key) =>
+      key.match(/^__reactProps/)
+    )[0];
+
+    const props = ltr[propsKey];
+
+    const store =
+      props.children.props.children.props.children[1].props.children.props
+        .children.props.children.props.value.store;
+
+    const state = store.getState();
+
+    switch (state.settings.local.themeColor) {
+      case "purple500":
+        return "rgb(120, 86, 255)";
+      case "orange500":
+        return "rgb(255, 122, 0)";
+      case "magenta500":
+        return "rgb(249, 24, 128)";
+      case "green500":
+        return "rgb(0, 186, 124)";
+      case "yellow500":
+        return "rgb(255, 212, 0)";
+      case "blue500":
+        return "rgb(29, 155, 240)";
+      default:
+        return "rgb(29, 155, 240)";
+    }
+  }
+
+  return new Promise((resolve) => {
+    const reactRoot = document.querySelector("#react-root");
+
+    const ltrO = new MutationObserver(() => {
+      const ltr = document.querySelector(
+        '#react-root > div > div > div[dir="ltr"]'
+      );
+
+      if (ltr !== null) {
+        const themeColorRGB = foundLtr(ltr);
+        resolve(themeColorRGB);
+
+        ltrO.disconnect();
+      } else {
+        throw new Error("Ltr is null");
+      }
+    });
+
+    ltrO.observe(reactRoot, {
+      subtree: true,
+      childList: true,
+    });
+  });
+}
+
+/**
+ * Set theme rgb to css variable.
+ * @param {*} themeColor
+ * @param {*} head
+ */
+function setThemeColor(themeColor, head) {
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+    :root {
+      --x-to-twitter-theme : ${themeColor};
+    }
+  `;
+
+  head.appendChild(style);
+}
+
+/**
  * タイトルをTwitterに変更
  */
 function titleChange(head) {
@@ -601,7 +679,7 @@ function styleInject(head) {
     }
 
     a[data-testid="SideNav_NewTweet_Button"], button[data-testid="tweetButtonInline"], button[data-testid="tweetButtonInline"], button[data-testid="tweetButton"] {
-      background-color: ${colors.twitterColor}!important;
+      background-color: var(--x-to-twitter-theme)!important;
     }
 
     a[data-testid="SideNav_NewTweet_Button"] div[dir="ltr"], a[data-testid="SideNav_NewTweet_Button"] > div[dir="ltr"] > svg,  button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButton"] div[dir="ltr"]  {
@@ -634,11 +712,19 @@ function headFound(head) {
       childList: true,
       subtree: true,
     });
+
+    if (envChecker() !== "extension") {
+      getThemeColor().then((themeColor) => {
+        setThemeColor(themeColor, head);
+      });
+    }
+
     postToTweet();
   }, 100);
 
   styleInject(head);
   titleChange(head);
+
   // i18nTest();
 }
 
@@ -729,15 +815,28 @@ function headFinder(callback) {
   });
 }
 
+function envChecker() {
+  if (typeof GM_info !== "undefined") {
+    if (GM_info.scriptHandler === "Userscripts") {
+      return "ios";
+    } else {
+      return "userscript";
+    }
+  } else {
+    return "extension";
+  }
+}
+
 /**
  * スクリプトを実行
  */
 function main() {
-  if (typeof GM_info !== "undefined") {
-    // userscript
+  const env = envChecker();
+
+  if (env === "userscript" || env === "ios") {
     let head;
-    if (GM_info.scriptHandler === "Userscripts") {
-      // ios
+
+    if (env === "ios") {
       head = document.head;
       trashSafari();
     } else {
@@ -747,12 +846,17 @@ function main() {
     if (head !== null && head !== undefined) {
       headFound(head);
     } else {
-      headFinder((head) => {
-        headFound(head);
+      const i = setInterval(() => {
+        const head = document.head;
+        if (head !== undefined && head !== null) {
+          clearInterval(i);
+          headFound(head);
+        }
       });
     }
-  } else {
-    // extension
+  }
+
+  if (env === "extension") {
     headFinder((head) => {
       headFound(head);
       replaceManifest(head);

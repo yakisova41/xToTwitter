@@ -15,6 +15,12 @@
       "matches": ["https://twitter.com/*", "https://X.com/*"],
       "run_at": "document_start",
       "js": ["userscript.user.js"]
+    },
+    {
+      "matches": ["https://twitter.com/*", "https://X.com/*"],
+      "run_at": "document_end",
+      "world": "MAIN",
+      "js": ["main-world.js"]
     }
   ],
   "web_accessible_resources": [

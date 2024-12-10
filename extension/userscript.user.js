@@ -747,8 +747,12 @@ function main() {
     if (head !== null && head !== undefined) {
       headFound(head);
     } else {
-      headFinder((head) => {
-        headFound(head);
+      const i = setInterval(() => {
+        const head = document.head;
+        if (head !== undefined && head !== null) {
+          clearInterval(i);
+          headFound(head);
+        }
       });
     }
   } else {

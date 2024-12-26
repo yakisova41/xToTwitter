@@ -785,15 +785,19 @@ function trashSafari() {
  * !! 拡張機能でのみ動作
  */
 function replaceManifest(head) {
-  document.querySelector('link[rel="manifest"]').remove();
-  const manifestEl = document.createElement("link");
-  manifestEl.setAttribute("rel", "manifest");
-  manifestEl.setAttribute("crossorigin", "use-credentials");
-  manifestEl.setAttribute(
-    "href",
-    chrome.runtime.getURL("/twitterManifest.json")
-  );
-  head.prepend(manifestEl);
+  const manifest = document.querySelector('link[rel="manifest"]');
+
+  if (manifest !== null) {
+    manifest.remove();
+    const manifestEl = document.createElement("link");
+    manifestEl.setAttribute("rel", "manifest");
+    manifestEl.setAttribute("crossorigin", "use-credentials");
+    manifestEl.setAttribute(
+      "href",
+      chrome.runtime.getURL("/twitterManifest.json")
+    );
+    head.prepend(manifestEl);
+  }
 }
 
 /**

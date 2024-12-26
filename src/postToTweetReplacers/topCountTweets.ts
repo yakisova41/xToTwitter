@@ -9,48 +9,38 @@ export function topCountTweets(messages: Messages) {
     `div[data-testid="cellInnerDiv"] > div > button[role="button"] > div > div > span`
   );
 
-  let splitShowEPosts: string[] | null = null;
-  if (messages.d6917e0c !== null) {
-    splitShowEPosts = messages.d6917e0c.split('"');
-  } else if (messages.d6917e0d !== null) {
-    splitShowEPosts = messages.d6917e0d.split('"');
+  const showEPostsMessages =
+    messages.d6917e0c !== null ? messages.d6917e0c : messages.d6917e0d;
+
+  if (showEPostsMessages === null) {
+    throw log(new Error("showEPostsMessages not found"));
   }
 
-  if (splitShowEPosts === null) {
-    throw log(new Error("Can't get retweet's language messages!"));
-  }
+  const splitShowEPosts = showEPostsMessages.split('"');
 
   if (showEPostsElem !== null) {
-    const parent =
-      showEPostsElem?.parentElement?.parentElement?.parentElement?.parentElement
-        ?.parentElement;
-    if (parent !== null && parent !== undefined) {
-      const key = Object.keys(parent).filter((key) => {
-        return key.match(/^__reactProps\$/);
-      })[0] as keyof typeof parent;
+    const parent = showEPostsElem!.parentElement!.parentElement!.parentElement!
+      .parentElement!.parentElement as any;
 
-      const props: any = parent[key];
+    if (parent === undefined || parent === null) {
+      throw log(new Error("parent not found"));
+    }
 
-      if (props === null && props === undefined) {
-        throw log(new Error("Props is not found"));
-      }
+    const key = Object.keys(parent).filter((key) => {
+      return key.match(/^__reactProps\$/);
+    })[0] as keyof typeof parent;
 
-      const count = props?.children?._owner?.memoizedProps?.item?.data?.content
-        ?.count as string;
+    const count =
+      parent[key]!.children!._owner!.memoizedProps!.item!.data!.content!.count;
 
-      if (count === null && count === undefined) {
-        throw log(new Error("Count is not found"));
-      }
+    const showEPosts =
+      count +
+      " " +
+      splitShowEPosts[1].trim() +
+      (splitShowEPosts[5] !== undefined ? splitShowEPosts[5] : "");
 
-      const showEPosts =
-        count +
-        " " +
-        splitShowEPosts[1].trim() +
-        (splitShowEPosts[5] !== undefined ? splitShowEPosts[5] : "");
-
-      if (showEPostsElem.textContent !== showEPosts) {
-        showEPostsElem.textContent = showEPosts;
-      }
+    if (showEPostsElem.textContent !== showEPosts) {
+      showEPostsElem.textContent = showEPosts;
     }
   }
 }

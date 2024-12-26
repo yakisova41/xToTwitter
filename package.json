@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c build/rollup.config.build.js",
+    "watch": "rollup -c build/rollup.config.watch.js --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@types/chrome": "^0.0.287",
+    "rollup": "^4.29.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-typescript2": "^0.36.0"
+  }
+}

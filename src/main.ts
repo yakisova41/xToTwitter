@@ -6,6 +6,7 @@ import { styleInject } from "./methods/styleInject";
 import { titleReplacer } from "./hooks/titleReplacer";
 import { getThemeColor, setThemeColor } from "./methods/setColor";
 import { replaceManifest } from "./methods/reaplceManifest";
+import { forSafari } from "./hooks/forSafari";
 
 declare var GM_info:
   | {
@@ -95,6 +96,13 @@ function headFound(
         setThemeColor(colorRGB, head);
       });
     }
+
+    if (document.body !== null) {
+      observerHooksControler.startObserve("body", {
+        subtree: true,
+        childList: true,
+      });
+    }
   }, 100);
 
   styleInject(head);
@@ -109,6 +117,7 @@ function main() {
   const observerHooksControler = new ObserverHooksControler();
   observerHooksControler.addHookHandler(faviconReplacer);
   observerHooksControler.addHookHandler(titleReplacer);
+  observerHooksControler.addHookHandler(forSafari);
 
   if (env === "extension") {
     headFinder((head) => {

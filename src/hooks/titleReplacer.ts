@@ -8,10 +8,10 @@ export const titleReplacer: ObserverHookHandler = {
 
     if (titleElem !== null) {
       if (titleElem.innerHTML === "X") {
-        log("Title repalce");
+        log("Title repalce", false);
         titleElem.innerHTML = "Twitter";
       } else {
-        log("Title repalce");
+        log("Title repalce", false);
         const split = titleElem.innerHTML.split("/");
 
         if (split[1] === " X") {

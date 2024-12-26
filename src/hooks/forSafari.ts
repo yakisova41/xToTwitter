@@ -4,19 +4,19 @@ import { paths } from "../values";
 
 export const forSafari: ObserverHookHandler = {
   selector: "body",
-  callback: (_body) => {
-    log("For safari");
-
-    const pathElems = document.querySelectorAll(
+  callback: (body) => {
+    const pathElems = body.querySelectorAll(
       [
-        `path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path`,
-        `path[d="${paths.oshogatsuXlogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path`,
-        'a[href="/i/verified-choose"] > div > svg > g > path)',
+        `path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path, a[href="/i/verified-choose"] > div > svg > g > path)`,
+        `path[d="${paths.oshogatsuXlogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path, a[href="/i/verified-choose"] > div > svg > g > path)`,
         `path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`,
       ].join(",")
     );
+
     if (pathElems.length !== 0) {
       pathElems.forEach((path) => {
+        log("For safari");
+
         path.setAttribute("d", paths.birdPath);
         path.classList.add("x-to-twitter");
       });

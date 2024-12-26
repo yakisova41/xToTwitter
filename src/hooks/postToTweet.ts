@@ -1,17 +1,41 @@
+import { ObserverHookHandler } from "../ObserverHooksControler";
 import { Langs, i18n } from "../i18n";
+import { header } from "../postToTweetReplacers/header";
+import { profileTweets } from "../postToTweetReplacers/profileTweets";
 import { quoteCounter } from "../postToTweetReplacers/quoteCounter";
 import { replyDraftEditorPlaceholder } from "../postToTweetReplacers/replyDraftEditorPlaceholder";
 import { retweetBtn } from "../postToTweetReplacers/retweetBtn";
 import { retweetCounter } from "../postToTweetReplacers/retweetCounter";
-import { tweetButton } from "../postToTweetReplacers/tweetButton";
-import { tweetButtonInline } from "../postToTweetReplacers/tweetButtonInline";
+import { retweeted } from "../postToTweetReplacers/retweeted";
+import { retweetedByPopup } from "../postToTweetReplacers/retweetedByPopup";
 import { sideNavNewTweetButton } from "../postToTweetReplacers/sideNavNewTweetButton";
 import { topCountTweets } from "../postToTweetReplacers/topCountTweets";
-import { header } from "../postToTweetReplacers/header";
-import { retweetedByPopup } from "../postToTweetReplacers/retweetedByPopup";
-import { retweeted } from "../postToTweetReplacers/retweeted";
+import { tweetButton } from "../postToTweetReplacers/tweetButton";
+import { tweetButtonInline } from "../postToTweetReplacers/tweetButtonInline";
 import { tweetedPill } from "../postToTweetReplacers/tweetedPill";
-import { profileTweets } from "../postToTweetReplacers/profileTweets";
+
+export const postToTweet: ObserverHookHandler = {
+  selector: "body",
+  callback: (_body) => {
+    const language = getLang();
+
+    const messages = i18n[language];
+
+    sideNavNewTweetButton(messages);
+    tweetButtonInline(messages);
+    tweetButton(messages);
+    replyDraftEditorPlaceholder(messages);
+    retweetBtn(messages);
+    retweetCounter(messages);
+    header(messages);
+    retweeted(messages);
+    retweetedByPopup(messages);
+    tweetedPill(messages);
+    profileTweets(messages);
+    quoteCounter(messages);
+    topCountTweets(messages);
+  },
+};
 
 /**
  * Get current language from cookie.
@@ -37,34 +61,4 @@ function getLang(): Langs {
   } else {
     return "en";
   }
-}
-
-/**
- * Change Post to Tweet
- */
-export function postToTweet() {
-  const language = getLang();
-
-  const messages = i18n[language];
-
-  const ob = new MutationObserver(() => {
-    sideNavNewTweetButton(messages);
-    tweetButtonInline(messages);
-    tweetButton(messages);
-    replyDraftEditorPlaceholder(messages);
-    retweetBtn(messages);
-    retweetCounter(messages);
-    header(messages);
-    retweeted(messages);
-    retweetedByPopup(messages);
-    tweetedPill(messages);
-    profileTweets(messages);
-    quoteCounter(messages);
-    topCountTweets(messages);
-  });
-
-  ob.observe(document.body, {
-    subtree: true,
-    childList: true,
-  });
 }

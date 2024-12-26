@@ -1,3 +1,6 @@
+/**
+ * Prevent observing dually for same element.
+ */
 export class ObserverHooksControler {
   // Record<selector, Replacer[]>
   private hookHandlers: Record<string, ObserverHookHandler[]> = {};

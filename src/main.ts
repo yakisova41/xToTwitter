@@ -1,5 +1,4 @@
 import { enableAlert, log } from "./log";
-import { postToTweet } from "./methods/postToTweet";
 import { ObserverHooksControler } from "./ObserverHooksControler";
 import { faviconReplacer } from "./hooks/faviconReplacer";
 import { styleInject } from "./methods/styleInject";
@@ -7,6 +6,7 @@ import { titleReplacer } from "./hooks/titleReplacer";
 import { getThemeColor, setThemeColor } from "./methods/setColor";
 import { replaceManifest } from "./methods/reaplceManifest";
 import { forSafari } from "./hooks/forSafari";
+import { postToTweet } from "./hooks/postToTweet";
 
 declare var GM_info:
   | {
@@ -89,8 +89,6 @@ function headFound(
   setTimeout(() => {
     log("Post To Tweet");
 
-    postToTweet();
-
     if (env !== "extension") {
       getThemeColor().then((colorRGB) => {
         setThemeColor(colorRGB, head);
@@ -118,6 +116,7 @@ function main() {
   observerHooksControler.addHookHandler(faviconReplacer);
   observerHooksControler.addHookHandler(titleReplacer);
   observerHooksControler.addHookHandler(forSafari);
+  observerHooksControler.addHookHandler(postToTweet);
 
   if (env === "extension") {
     headFinder((head) => {

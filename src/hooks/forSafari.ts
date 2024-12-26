@@ -8,7 +8,12 @@ export const forSafari: ObserverHookHandler = {
     log("For safari");
 
     const pathElems = document.querySelectorAll(
-      `path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path, a[href="/i/verified-choose"] > div > svg > g > path), path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`
+      [
+        `path[d="${paths.xLogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path`,
+        `path[d="${paths.oshogatsuXlogoPath}"]:not(.x-to-twitter):not(a[href="/i/verified-choose"] > div > div > svg > g > path`,
+        'a[href="/i/verified-choose"] > div > svg > g > path)',
+        `path[d="${paths.loadingXLogoPath}"]:not(.x-to-twitter)`,
+      ].join(",")
     );
     if (pathElems.length !== 0) {
       pathElems.forEach((path) => {

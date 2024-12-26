@@ -8,7 +8,10 @@ export function styleInject(head: Element) {
 
   const verifiedSelector = `a[href="/i/verified-choose"] > div > div > svg > g > path`;
   const verifiedSelectorMobile = `a[href="/i/verified-choose"] > div > svg > g > path`;
-  const xLogoSelector = `path[d="${paths.xLogoPath}"]:not(${verifiedSelector}):not(${verifiedSelectorMobile})`;
+  const xLogoSelector = [
+    `path[d="${paths.oshogatsuXlogoPath}"]:not(${verifiedSelector}):not(${verifiedSelectorMobile})`,
+    `path[d="${paths.xLogoPath}"]:not(${verifiedSelector}):not(${verifiedSelectorMobile})`,
+  ].join(",");
   const xLogoDarkmodeSelector = `div[style="text-overflow: unset; color: rgb(239, 243, 244);"] > svg > g > path:not(${verifiedSelector}):not(${verifiedSelectorMobile})`;
   const homeSelector =
     'a[data-testid="AppTabBar_Home_Link"] > div > div > svg > g > path';

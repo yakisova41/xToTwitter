@@ -29,11 +29,14 @@ function envChecker() {
     if (GM_info.scriptHandler === "Userscripts") {
       return "userscript_ios";
     }
-    if (GM_info.userAgentData.platform === "Windows") {
-      return "userscript_windows";
-    } else {
-      return "userscript_not_windows";
+
+    if (typeof GM_info.userAgentData !== "undefined") {
+      if (GM_info.userAgentData.platform === "Windows") {
+        return "userscript_windows";
+      }
     }
+
+    return "userscript_not_windows";
   } else {
     return "extension";
   }
@@ -103,7 +106,7 @@ function headFound(
     }
   }, 100);
 
-  styleInject(head);
+  styleInject(head, env);
 }
 
 function main() {

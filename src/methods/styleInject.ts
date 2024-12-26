@@ -3,7 +3,14 @@ import { colors, paths } from "../values";
 /**
  * Add style to head
  */
-export function styleInject(head: Element) {
+export function styleInject(
+  head: Element,
+  env:
+    | "userscript_ios"
+    | "userscript_windows"
+    | "userscript_not_windows"
+    | "extension"
+) {
   const style = document.createElement("style");
 
   const verifiedSelector = `a[href="/i/verified-choose"] > div > div > svg > g > path`;
@@ -50,12 +57,18 @@ export function styleInject(head: Element) {
       d:path("${paths.oldHomePath}");
     }
 
+    ${
+      env === "extension" || env === "userscript_windows"
+        ? `
     a[data-testid="SideNav_NewTweet_Button"], button[data-testid="tweetButtonInline"], button[data-testid="tweetButtonInline"], button[data-testid="tweetButton"] {
       background-color: var(--x-to-twitter-theme)!important;
     }
 
     a[data-testid="SideNav_NewTweet_Button"] div[dir="ltr"], a[data-testid="SideNav_NewTweet_Button"] > div[dir="ltr"] > svg,  button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButtonInline"] div[dir="ltr"], button[data-testid="tweetButton"] div[dir="ltr"]  {
       color: rgb(255, 255, 255)!important;
+    }
+    `
+        : ""
     }
     `;
   head.appendChild(style);

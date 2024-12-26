@@ -1,7 +1,7 @@
 {
   "name": "__MSG_Name__",
   "short_name": "xToTwitter",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "manifest_version": 3,
   "description": "__MSG_Description__",
   "default_locale": "en",

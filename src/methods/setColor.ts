@@ -1,4 +1,8 @@
 /**
+ * !NOTE It's the code for userscript,
+ * so you must write a same code to extension/main-world.js for chrome extension
+ * 
+ * 
  * Get theme rgb from react state.
  * @returns {Promise<string>} theme RGB
  */
@@ -11,8 +15,7 @@ export function getThemeColor(): Promise<string> {
     const props = ltr[propsKey] as any;
 
     const store =
-      props.children.props.children.props.children[1].props.children.props
-        .children.props.children.props.value.store;
+      props.children[1].props.children.props.children.props.children.props.value.store;
 
     const state = store.getState();
 

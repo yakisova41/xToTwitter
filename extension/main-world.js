@@ -11,8 +11,7 @@ function getThemeColor() {
     const props = ltr[propsKey];
 
     const store =
-      props.children.props.children.props.children[1].props.children.props
-        .children.props.children.props.value.store;
+      props.children[1].props.children.props.children.props.children.props.value.store;
 
     const state = store.getState();
 
